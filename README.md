@@ -86,3 +86,28 @@ ln -s /media/[UUID]/datasafe backup
 ```
 ###### public key
 add public key to ```/home/panda/.ssh/authorized_keys```
+
+### Portability
+Unplug USB Drive from Pi and plug it in to any Linux PC
+
+###### Install LUKS on Linux PC
+```
+sudo apt-get install cryptsetup
+```
+
+###### Decrypt the volume
+```
+sudo cryptsetup luksOpen /dev/sdd DataSafe
+```
+
+###### Mount
+```
+sudo mkdir /media/data_safe
+sudo mount /dev/mapper/DataSafe /media/data_safe
+```
+
+###### Unmount
+```
+sudo umount /media/data_safe
+sudo cryptsetup luksClose DataSafe
+```
